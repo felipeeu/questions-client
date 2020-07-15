@@ -1,0 +1,30 @@
+schema {
+  query: RootQueryType
+  mutation: Mutation
+}
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Mutation {
+  addQuestion(topic: String!, body: String!, answer: String!): Question
+}
+
+type Question {
+  id: String!
+  topic: String!
+  body: String!
+  answer: String!
+}
+
+"""Schema root"""
+type RootQueryType {
+  question(id: String): Question
+
+  """List of all Questions"""
+  questions: [Question]
+}
+

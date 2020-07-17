@@ -17,9 +17,9 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Modal from "@material-ui/core/Modal";
-import AddQuestion from "./question/AddQuestion";
+import AddQuestion from "../question/AddQuestion";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
-import DeleteConfirmation from "./DeleteConfirmation";
+import DeleteConfirmation from "../component/DeleteConfirmation";
 
 const useStyles = makeStyles(theme => ({
   icon: {

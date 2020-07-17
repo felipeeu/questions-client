@@ -4,8 +4,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 
 import Container from "@material-ui/core/Container";
-import DeleteQuestionMutation from "./mutations/DeleteQuestionMutation";
-import { useModalStyles } from "./StyleMui/ModalStyle";
+import DeleteQuestionMutation from "../mutations/DeleteQuestionMutation";
+import { useModalStyles } from "../StyleMui/ModalStyle";
 
 export default function DeleteConfirmation({
   questionId,

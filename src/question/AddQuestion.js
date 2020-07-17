@@ -29,15 +29,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AddQuestion() {
+export default function AddQuestion({ payload, setPayload, setModalOpen }) {
   const classes = useStyles();
   const [state, setState] = React.useState({ topic: "", body: "", answer: "" });
 
   const createQuestion = () => {
     const { topic, body, answer } = state;
-    CreateQuestionMutation(topic, body, answer, () =>
-      console.log(`Mutation completed`)
-    );
+    CreateQuestionMutation(topic, body, answer, () => {
+      setPayload(payload.concat([state]));
+      setModalOpen(false);
+    });
   };
 
   return (

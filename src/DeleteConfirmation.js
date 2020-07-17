@@ -27,11 +27,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function DeleteConfirmation({ questionId }) {
+export default function DeleteConfirmation({
+  questionId,
+  payload,
+  setPayload,
+  setDeleteModalOpen
+}) {
   const classes = useStyles();
 
   const deleteQuestion = () => {
-    DeleteQuestionMutation(questionId, () => console.log("questao deletada"));
+    DeleteQuestionMutation(questionId, () => {
+      setPayload(
+        payload && payload.filter(question => question.id !== questionId)
+      );
+      setDeleteModalOpen(false);
+    });
   };
 
   return (

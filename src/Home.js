@@ -1,7 +1,8 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
+import Divider from '@material-ui/core/Divider';
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -18,7 +19,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Modal from "@material-ui/core/Modal";
 import AddQuestion from "./question/AddQuestion";
 import DeleteTwoToneIcon from "@material-ui/icons/DeleteTwoTone";
-import DeleteQuestionMutation from "./mutations/DeleteQuestionMutation";
 import DeleteConfirmation from "./DeleteConfirmation";
 
 const useStyles = makeStyles(theme => ({
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%"
   },
   cardContent: {
     flexGrow: 1
@@ -54,7 +54,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Home({ questions }) {
+
+React.useEffect(()=>{
+  setPayload(questions)
+}, [questions])
+
   const classes = useStyles();
+  const [payload , setPayload]= React.useState([])
   const [questionIdentifier, setQuestionIdentifier] = React.useState("");
   const [modalOpen, setModalOpen] = React.useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
@@ -71,9 +77,9 @@ export default function Home({ questions }) {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <CameraIcon className={classes.icon} />
+          <LocalLibraryIcon className={classes.icon} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            Banco de Questões
           </Typography>
         </Toolbar>
       </AppBar>
@@ -88,7 +94,7 @@ export default function Home({ questions }) {
               color="textPrimary"
               gutterBottom
             >
-              Album layout
+              Banco de Questões
             </Typography>
             <Typography
               variant="h5"
@@ -96,9 +102,7 @@ export default function Home({ questions }) {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              Delete , edite ou exclua suas questões
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
@@ -116,13 +120,8 @@ export default function Home({ questions }) {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                   >
-                    <AddQuestion />
+                    <AddQuestion payload = {payload} setPayload={setPayload} setModalOpen={setModalOpen} />
                   </Modal>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
                 </Grid>
               </Grid>
             </div>
@@ -130,42 +129,41 @@ export default function Home({ questions }) {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {questions &&
-              questions.map((question, idx) => (
+            {payload &&
+              payload.map((question, idx) => (
                 <Grid item key={idx} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
-                    {/* <CardMedia
-                    className={classes.cardMedia}
-                    image= {`https://loremflickr.com/285/160/${topic}/`} //"https://source.unsplash.com/random"
-                    title="Image title"
-                  /> */}
-
                     <CardContent className={classes.cardContent}>
+                      <Grid container flexDirection="row" justify= "space-around" >
                       <Typography gutterBottom variant="h5" component="h2">
                         {question.body}
                       </Typography>
+                      
                       <IconButton
                         onClick={() => handleExpandClick(idx)}
                         aria-expanded={idx === questionIdentifier}
                         aria-label="show more"
                       >
+              
                         {idx === questionIdentifier ? (
                           <ExpandLess />
                         ) : (
                           <ExpandMore />
                         )}
                       </IconButton>
+                      </Grid>
+                      <Divider/>
                       <Collapse
                         in={idx === questionIdentifier}
                         timeout="auto"
                         unmountOnExit
                       >
-                        <Typography>Resposta</Typography>
+                        <Grid><Typography color="textSecondary"  >{question.answer}</Typography></Grid>
                       </Collapse>
                     </CardContent>
                     <CardActions>
                       <Button size="small" color="primary">
-                        View
+                        Edit
                       </Button>
                       <Button size="small" color="primary">
                         <DeleteTwoToneIcon
@@ -179,7 +177,7 @@ export default function Home({ questions }) {
                         open={deleteModalOpen}
                         onClose={() => setDeleteModalOpen(false)}
                       >
-                        <DeleteConfirmation questionId={id} />
+                        <DeleteConfirmation questionId={id} payload= {payload} setPayload= {setPayload} setDeleteModalOpen={setDeleteModalOpen} />
                       </Modal>
                     </CardActions>
                   </Card>
@@ -190,16 +188,13 @@ export default function Home({ questions }) {
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
         <Typography
           variant="subtitle1"
           align="center"
           color="textSecondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          Produzido por Felipe Domingues utilizando Material UI
         </Typography>
       </footer>
     </React.Fragment>

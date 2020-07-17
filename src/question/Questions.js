@@ -12,6 +12,7 @@ export const Questions = () => {
         query QuestionsQuery {
           questions {
             body
+            answer
             id
           }
         }

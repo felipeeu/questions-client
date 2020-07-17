@@ -12,6 +12,7 @@ export type QuestionsQueryVariables = {||};
 export type QuestionsQueryResponse = {|
   +questions: ?$ReadOnlyArray<?{|
     +body: string,
+    +answer: string,
     +id: string,
   |}>
 |};
@@ -26,6 +27,7 @@ export type QuestionsQuery = {|
 query QuestionsQuery {
   questions {
     body
+    answer
     id
   }
 }
@@ -46,6 +48,13 @@ var v0 = [
         "args": null,
         "kind": "ScalarField",
         "name": "body",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "answer",
         "storageKey": null
       },
       {
@@ -77,16 +86,16 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "0176f6336bc3e11c2f0d3a37e3469410",
+    "cacheID": "5d13c476e239e1eb90353e7a382d27ae",
     "id": null,
     "metadata": {},
     "name": "QuestionsQuery",
     "operationKind": "query",
-    "text": "query QuestionsQuery {\n  questions {\n    body\n    id\n  }\n}\n"
+    "text": "query QuestionsQuery {\n  questions {\n    body\n    answer\n    id\n  }\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e9038efd06e9b3f57981e88994d1b17d';
+(node/*: any*/).hash = '214c603da599b3e52d06a3cd0f9b09a1';
 
 module.exports = node;

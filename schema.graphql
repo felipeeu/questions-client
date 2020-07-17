@@ -10,7 +10,11 @@ directive @specifiedBy(
 ) on SCALAR
 
 type Mutation {
-  addQuestion(topic: String!, body: String!, answer: String!): Question
+  """Create a question"""
+  createQuestion(topic: String!, body: String!, answer: String!): Question
+
+  """Delete a question"""
+  deleteQuestion(id: String!): Question
 }
 
 type Question {

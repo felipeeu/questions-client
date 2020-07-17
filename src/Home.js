@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -54,13 +54,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Home({ questions }) {
-
-React.useEffect(()=>{
-  setPayload(questions)
-}, [questions])
+  React.useEffect(() => {
+    setPayload(questions);
+  }, [questions]);
 
   const classes = useStyles();
-  const [payload , setPayload]= React.useState([])
+  const [payload, setPayload] = React.useState([]);
   const [questionIdentifier, setQuestionIdentifier] = React.useState("");
   const [modalOpen, setModalOpen] = React.useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
@@ -120,7 +119,11 @@ React.useEffect(()=>{
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                   >
-                    <AddQuestion payload = {payload} setPayload={setPayload} setModalOpen={setModalOpen} />
+                    <AddQuestion
+                      payload={payload}
+                      setPayload={setPayload}
+                      setModalOpen={setModalOpen}
+                    />
                   </Modal>
                 </Grid>
               </Grid>
@@ -134,31 +137,38 @@ React.useEffect(()=>{
                 <Grid item key={idx} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
-                      <Grid container flexDirection="row" justify= "space-around" >
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {question.body}
-                      </Typography>
-                      
-                      <IconButton
-                        onClick={() => handleExpandClick(idx)}
-                        aria-expanded={idx === questionIdentifier}
-                        aria-label="show more"
+                      <Grid
+                        container
+                        flexDirection="row"
+                        justify="space-around"
                       >
-              
-                        {idx === questionIdentifier ? (
-                          <ExpandLess />
-                        ) : (
-                          <ExpandMore />
-                        )}
-                      </IconButton>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {question.body}
+                        </Typography>
+
+                        <IconButton
+                          onClick={() => handleExpandClick(idx)}
+                          aria-expanded={idx === questionIdentifier}
+                          aria-label="show more"
+                        >
+                          {idx === questionIdentifier ? (
+                            <ExpandLess />
+                          ) : (
+                            <ExpandMore />
+                          )}
+                        </IconButton>
                       </Grid>
-                      <Divider/>
+                      <Divider />
                       <Collapse
                         in={idx === questionIdentifier}
                         timeout="auto"
                         unmountOnExit
                       >
-                        <Grid><Typography color="textSecondary"  >{question.answer}</Typography></Grid>
+                        <Grid>
+                          <Typography color="textSecondary">
+                            {question.answer}
+                          </Typography>
+                        </Grid>
                       </Collapse>
                     </CardContent>
                     <CardActions>
@@ -177,7 +187,12 @@ React.useEffect(()=>{
                         open={deleteModalOpen}
                         onClose={() => setDeleteModalOpen(false)}
                       >
-                        <DeleteConfirmation questionId={id} payload= {payload} setPayload= {setPayload} setDeleteModalOpen={setDeleteModalOpen} />
+                        <DeleteConfirmation
+                          questionId={id}
+                          payload={payload}
+                          setPayload={setPayload}
+                          setDeleteModalOpen={setDeleteModalOpen}
+                        />
                       </Modal>
                     </CardActions>
                   </Card>

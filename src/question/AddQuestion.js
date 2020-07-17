@@ -4,33 +4,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CreateQuestionMutation from "../mutations/CreateQuestionMutation";
-
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "white"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
+import {useModalStyles} from "../StyleMui/ModalStyle"
 
 export default function AddQuestion({ payload, setPayload, setModalOpen }) {
-  const classes = useStyles();
+  const classes = useModalStyles();
   const [state, setState] = React.useState({ topic: "", body: "", answer: "" });
 
   const createQuestion = () => {
@@ -46,7 +25,7 @@ export default function AddQuestion({ payload, setPayload, setModalOpen }) {
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-          Crie aqui sua questão de química
+          Crie aqui sua questão 
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container justify="center" spacing={2}>
@@ -64,10 +43,12 @@ export default function AddQuestion({ payload, setPayload, setModalOpen }) {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                multiline
+                rows={6}
                 required
                 fullWidth
                 id="body"
-                label="Questão"
+                label="Pergunta"
                 name="body"
                 autoComplete="body"
                 onChange={e => setState({ ...state, body: e.target.value })}
@@ -76,6 +57,8 @@ export default function AddQuestion({ payload, setPayload, setModalOpen }) {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
+                multiline
+                rows={6}
                 required
                 fullWidth
                 id="answer"
